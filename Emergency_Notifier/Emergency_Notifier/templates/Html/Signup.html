@@ -5,22 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simple Bootstrap Login Form Example</title>
     <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="../Css/style.css">
   </head>
   <body>
     <main>
   <div class="wrapper">
-    <form class="form-signin">       
+    <form class="form-signin" method="POST">
+      {% csrf_token %}              
       <h2 class="form-signin-heading">Emergency Notifier Login</h2>
-      First name: <input type = "text" class = "form-control" name="first" placeholder="First name" required="" autofocus=""/>
-      Last name: <input type="text" class="form-control" name="last" placeholder="Last name" required=""/>
-      Username: <input type = "text" class="form-control" name="username" placeholder="Username" required=""/>
-      Password: <input type="password" class="form-control" name="password" placeholder="********" required="" />
-      Confirm Password: <input type="password" class="form-control" name="cnfpassword" placeholder="********" required="" />
-      <label class="checkbox">
-        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> <a href="">Terms and Conditions</a>
-      </label>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+      {{signup.as_p}}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">SignUp</button>
     </form>
   </div>
   </article>
