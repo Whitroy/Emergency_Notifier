@@ -1,5 +1,5 @@
 from django import forms
-from formInterface.models import UserData
+from formInterface.models import UserData,LoginData
 
 class SignUpFrom(forms.ModelForm):
     class Meta:
@@ -25,5 +25,12 @@ class SignUpFrom(forms.ModelForm):
             'Terms_and_Conditions':'Terms and Conditions'
         }
 
-
+class Loginform(forms.ModelForm):
+    class Meta:
+        model=LoginData
+        fields='__all__'
+        widgets={
+            'Username':forms.TextInput(attrs={'class':'form-control'}),
+            'Password':forms.PasswordInput(attrs={'class':'form-control'})
+        }
 

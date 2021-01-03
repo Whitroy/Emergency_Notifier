@@ -1,10 +1,26 @@
 from django.shortcuts import render,redirect
 from formInterface import form
 from django.http import HttpResponse
+from .models import UserData
+from django.db import connection
 # Create your views here.
 
 def Login(request):
-    return HttpResponse('<h1> submitted</h1>')
+    if request.method == 'POST':
+        loginpage= form.Loginform(request.POST)
+        if(loginpage.is_valid()):
+            user = loginpage.cleaned_data['Username']
+            password = loginpage.cleaned_data['Password']
+
+            db= connection.get_connection_params()['db']
+            data=UserData.from_db(db,['Username','password'],values=[user,password])
+            print(data)
+            #redirect('signup',{'signup':form.SignUpFrom()})
+    else:
+        loginpage=form.Loginform()
+    
+    return render(request,'Html/Login.html',{'login':loginpage})
+
 
 def Signup(request):
     if request.method == 'POST':
@@ -20,7 +36,7 @@ def Signup(request):
             terms = signup.cleaned_data['Terms_and_Conditions']
 
             signup.save()
-            return redirect('/login')
+            return redirect('login',{'login':form.LoginData()})
             
     else:
         signup = form.SignUpFrom()

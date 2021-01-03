@@ -20,3 +20,13 @@ class UserData(models.Model):
 
     def __str__(self):
         return self.First_name+" "+self.last_name
+
+class LoginData(models.Model):
+    Username = models.CharField(max_length=50,default="")
+    Password = models.CharField(max_length=40,default="")
+
+    class meta:
+        db_table = 'Login Data'
+    
+    def __str__(self):
+        return self.Username
